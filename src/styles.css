@@ -67,6 +67,9 @@
   --radius: 0.25rem;
   --background: oklch(0.075 0.008 70);
   --foreground: oklch(0.91 0.033 77);
+  --lamp-warm: oklch(0.72 0.1 70);
+  --lamp-warm-soft: oklch(0.58 0.075 62 / 35%);
+  --lamp-shadow: oklch(0 0 0 / 88%);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
@@ -157,10 +160,27 @@
   will-change: transform;
 }
 
+.lamp-motion-origin:focus-visible {
+  filter: drop-shadow(0 0 0.5rem var(--lamp-warm-soft));
+}
+
 .lamp-image {
   width: clamp(13rem, 23vw, 25rem);
   height: min(78svh, 43rem);
   will-change: filter, opacity;
+  transition: filter 1.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.lamp-image-dim {
+  filter: brightness(0.17) saturate(0.42) contrast(0.92) drop-shadow(0 0.9rem 1rem var(--lamp-shadow));
+}
+
+.lamp-motion-origin:hover .lamp-image-dim {
+  filter: brightness(0.21) saturate(0.46) contrast(0.94) drop-shadow(0 0.9rem 1rem var(--lamp-shadow));
+}
+
+.lamp-image-lit {
+  filter: brightness(1) saturate(0.96) drop-shadow(0 1.1rem 1.2rem var(--lamp-shadow)) drop-shadow(0 0 0.8rem var(--lamp-warm-soft));
 }
 
 .message-wrap {
@@ -171,6 +191,26 @@
   will-change: clip-path, opacity, transform;
 }
 
+.text-illumination {
+  left: 48%;
+  top: 50%;
+  width: min(50vw, 49rem);
+  color: var(--lamp-warm);
+  filter: blur(2.8rem);
+  transform: translateY(-50%) skewX(-4deg);
+  will-change: opacity;
+}
+
+.text-illumination p {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5.2vw, 6rem);
+  font-weight: 600;
+  line-height: 0.88;
+  letter-spacing: 0;
+  margin: 0;
+  white-space: nowrap;
+}
+
 .editorial-title {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 4.6vw, 5.5rem);
@@ -179,7 +219,7 @@
   letter-spacing: 0;
   margin: 0;
   text-wrap: balance;
-  text-shadow: 0 1px 16px color-mix(in oklab, var(--foreground) 7%, transparent);
+  text-shadow: -0.18rem 0 1.3rem var(--lamp-warm-soft);
 }
 
 .editorial-title span {
@@ -211,6 +251,17 @@
     top: 67%;
     width: 86vw;
     transform: none;
+  }
+
+  .text-illumination {
+    left: 3vw;
+    top: 67%;
+    width: 94vw;
+    transform: none;
+  }
+
+  .text-illumination p {
+    font-size: clamp(2.2rem, 10vw, 3.5rem);
   }
 
   .editorial-title {
