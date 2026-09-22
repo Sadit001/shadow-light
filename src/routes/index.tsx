@@ -63,8 +63,8 @@ function Index() {
             y: hasMoved ? "var(--lamp-shift-y)" : "0vh",
             rotate: phase === "moving" ? -0.35 : 0,
           }}
-          whileHover={!hasStarted && !reduceMotion ? { scale: 1.012 } : undefined}
-          whileTap={!hasStarted && !reduceMotion ? { scale: 0.995 } : undefined}
+          whileHover={!hasStarted && !reduceMotion ? { scale: 1.012 } : {}}
+          whileTap={!hasStarted && !reduceMotion ? { scale: 0.995 } : {}}
           transition={{
             x: { duration: reduceMotion ? 0 : 2.85, ease: [0.16, 1, 0.3, 1] },
             y: { duration: reduceMotion ? 0 : 2.85, ease: [0.16, 1, 0.3, 1] },
