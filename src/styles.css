@@ -19,6 +19,8 @@
  */
 
 @theme inline {
+  --font-display: "Bodoni Moda", "Times New Roman", serif;
+  --font-sans: "Manrope", sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -62,9 +64,9 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --radius: 0.25rem;
+  --background: oklch(0.075 0.008 70);
+  --foreground: oklch(0.91 0.033 77);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
@@ -140,5 +142,89 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
+    margin: 0;
+  }
+}
+
+.lamp-scene {
+  --lamp-shift-x: -26vw;
+  --lamp-shift-y: 0vh;
+  touch-action: manipulation;
+}
+
+.lamp-motion-origin {
+  will-change: transform;
+}
+
+.lamp-image {
+  width: clamp(13rem, 23vw, 25rem);
+  height: min(78svh, 43rem);
+  will-change: filter, opacity;
+}
+
+.message-wrap {
+  left: 50%;
+  top: 50%;
+  width: min(46vw, 45rem);
+  transform: translateY(-50%);
+  will-change: clip-path, opacity, transform;
+}
+
+.editorial-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 5.4vw, 6.5rem);
+  font-weight: 600;
+  line-height: 0.88;
+  letter-spacing: 0;
+  margin: 0;
+  text-wrap: balance;
+  text-shadow: 0 1px 16px color-mix(in oklab, var(--foreground) 7%, transparent);
+}
+
+.editorial-title span {
+  display: block;
+  white-space: nowrap;
+}
+
+.go-link {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .lamp-scene {
+    --lamp-shift-x: -24vw;
+    --lamp-shift-y: -20vh;
+  }
+
+  .lamp-image {
+    width: clamp(11rem, 50vw, 16rem);
+    height: min(62svh, 32rem);
+  }
+
+  .message-wrap {
+    left: 8vw;
+    top: 67%;
+    width: 86vw;
+    transform: none;
+  }
+
+  .editorial-title {
+    font-size: clamp(2.3rem, 11.5vw, 4rem);
+    line-height: 0.9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lamp-motion-origin,
+  .lamp-image,
+  .message-wrap,
+  .go-link,
+  .go-line {
+    transition-duration: 0.01ms !important;
   }
 }
